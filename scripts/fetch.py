@@ -31,7 +31,7 @@ PROVIDERS = {
         'parser': 'linode_text',
         'output': 'lists/providers/linode.txt',
     },
-    'tor': {
+    'tor-exit-nodes': {
         'url': 'https://check.torproject.org/exit-addresses',
         'parser': 'tor_exit',
         'output': 'lists/providers/tor-exit-nodes.txt',
@@ -262,8 +262,7 @@ def main():
     parser.add_argument(
         'providers',
         nargs='*',
-        choices=list(PROVIDERS.keys()) + ['all'],
-        default=['all'],
+        default=[],
         help='Providers to fetch (default: all)'
     )
     parser.add_argument(
@@ -297,7 +296,7 @@ def main():
         sys.exit(0)
 
     # Determine which providers to fetch
-    if 'all' in args.providers:
+    if 'all' in args.providers or not args.providers:
         providers_to_fetch = list(PROVIDERS.keys())
     else:
         providers_to_fetch = args.providers
