@@ -55,6 +55,7 @@ jobs:
       - name: Enable auto-merge
         if: steps.changes.outputs.changed == 'true'
         run: |
-          gh pr enable-auto-merge ${{ steps.cpr.outputs.pull-request-number }}
+          gh api -X PUT "repos/${{ github.repository }}/pulls/${{ steps.cpr.outputs.pull-request-number }}/auto_merge" \
+            -H "Accept: application/vnd.github+json"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
