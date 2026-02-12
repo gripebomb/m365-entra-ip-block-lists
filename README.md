@@ -7,9 +7,8 @@ Curated IPv4 CIDR block lists for Microsoft 365 / Microsoft Entra IP-based contr
 ```text
 lists/
   providers/               # Canonical provider-specific lists
-  combined/                # Large aggregated lists
   chunks/                  # Split files for upload-size / entry-limit workflows
-    aws-ipv4/
+    aws/
     digitalocean/
     hetzner/
     hostinger/
@@ -24,6 +23,7 @@ lists/
 
 ### `lists/providers/`
 
+- `aws.txt` (7,367 CIDRs)
 - `digitalocean.txt` (1,051 CIDRs)
 - `hetzner.txt` (81 CIDRs)
 - `hostinger.txt` (859 CIDRs)
@@ -33,16 +33,12 @@ lists/
 - `tor-exit-nodes.txt` (1,372 CIDRs)
 - `vultr.txt` (434 CIDRs)
 
-### `lists/combined/`
-
-- `aws-ipv4-ranges.txt` (7,367 CIDRs)
-
 ### `lists/chunks/`
 
-- `aws-ipv4/aws-ipv4-ranges-part-001.txt` (2,000 CIDRs)
-- `aws-ipv4/aws-ipv4-ranges-part-002.txt` (2,000 CIDRs)
-- `aws-ipv4/aws-ipv4-ranges-part-003.txt` (2,000 CIDRs)
-- `aws-ipv4/aws-ipv4-ranges-part-004.txt` (1,367 CIDRs)
+- `aws/aws-part-001.txt` (2,000 CIDRs)
+- `aws/aws-part-002.txt` (2,000 CIDRs)
+- `aws/aws-part-003.txt` (2,000 CIDRs)
+- `aws/aws-part-004.txt` (1,367 CIDRs)
 - `digitalocean/digitalocean-part-001.txt` (1,051 CIDRs)
 - `hetzner/hetzner-part-001.txt` (81 CIDRs)
 - `hostinger/hostinger-part-001.txt` (859 CIDRs)
@@ -67,7 +63,6 @@ All list files are plain text with one CIDR per line, for example:
 
 - Use files in `lists/providers/` when one named location per provider is acceptable.
 - Use files in `lists/chunks/` when you need to split uploads into multiple named locations due to platform limits.
-- Use `lists/combined/aws-ipv4-ranges.txt` (or its chunks) for broad AWS range coverage.
 
 ## Maintenance Workflow
 
