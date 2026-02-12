@@ -11,8 +11,12 @@ lists/
   chunks/                  # Split files for upload-size / entry-limit workflows
     aws-ipv4/
     digitalocean/
+    hetzner/
+    hostinger/
     linode/
+    ovh/
     protonvpn/
+    tor-exit-nodes/
     vultr/
 ```
 
@@ -40,10 +44,14 @@ lists/
 - `aws-ipv4/aws-ipv4-ranges-part-003.txt` (2,000 CIDRs)
 - `aws-ipv4/aws-ipv4-ranges-part-004.txt` (1,367 CIDRs)
 - `digitalocean/digitalocean-part-001.txt` (1,051 CIDRs)
+- `hetzner/hetzner-part-001.txt` (81 CIDRs)
+- `hostinger/hostinger-part-001.txt` (859 CIDRs)
 - `linode/linode-part-001.txt` (2,000 CIDRs)
 - `linode/linode-part-002.txt` (2,000 CIDRs)
 - `linode/linode-part-003.txt` (1,132 CIDRs)
+- `ovh/ovh-part-001.txt` (599 CIDRs)
 - `protonvpn/protonvpn-part-001.txt` (830 CIDRs)
+- `tor-exit-nodes/tor-exit-nodes-part-001.txt` (1,372 CIDRs)
 - `vultr/vultr-part-001.txt` (434 CIDRs)
 
 ## Formatting Standard
