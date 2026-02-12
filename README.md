@@ -1,10 +1,6 @@
-# m365-entra-ip-lists
+# m365-entra-ip-block-lists
 
 Curated IPv4 CIDR block lists for Microsoft 365 / Microsoft Entra IP-based controls (Named Locations, Conditional Access, and related allow/block workflows).
-
-## Recommended GitHub Repository Name
-
-`m365-entra-ip-lists`
 
 ## Repository Structure
 
