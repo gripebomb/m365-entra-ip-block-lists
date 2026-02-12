@@ -89,7 +89,13 @@ def parse_digitalocean_csv(content: str) -> list[str]:
         if parts:
             cidr = parts[0].strip()
             if '/' in cidr:
-                cidrs.append(cidr)
+                # Only include IPv4 addresses
+                try:
+                    network = ipaddress.ip_network(cidr, strict=False)
+                    if network.version == 4:
+                        cidrs.append(cidr)
+                except ValueError:
+                    continue
     return cidrs
 
 
