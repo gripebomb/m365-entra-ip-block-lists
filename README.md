@@ -43,12 +43,12 @@ lists/
 - `aws-ipv4/aws-ipv4-ranges-part-002.txt` (2,000 CIDRs)
 - `aws-ipv4/aws-ipv4-ranges-part-003.txt` (2,000 CIDRs)
 - `aws-ipv4/aws-ipv4-ranges-part-004.txt` (1,367 CIDRs)
-- `digitalocean/digitalocean-part-000.txt` (1,051 CIDRs)
-- `linode/linode-part-000.txt` (2,000 CIDRs)
+- `digitalocean/digitalocean-part-001.txt` (1,051 CIDRs)
 - `linode/linode-part-001.txt` (2,000 CIDRs)
-- `linode/linode-part-002.txt` (1,132 CIDRs)
+- `linode/linode-part-002.txt` (2,000 CIDRs)
+- `linode/linode-part-003.txt` (1,132 CIDRs)
 - `protonvpn/protonvpn-part-001.txt` (830 CIDRs)
-- `vultr/vultr-part-000.txt` (434 CIDRs)
+- `vultr/vultr-part-001.txt` (434 CIDRs)
 
 ## Formatting Standard
 
