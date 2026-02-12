@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch fresh IP ranges from provider APIs."""
+"""Fetch fresh IP ranges from provider APIs and update chunks."""
 
 import argparse
 import ipaddress
@@ -8,6 +8,10 @@ import sys
 import urllib.request
 import urllib.error
 from pathlib import Path
+
+
+CHUNK_SIZE = 2000
+CHUNKS_DIR = Path('lists/chunks')
 
 
 # Provider configurations
@@ -145,7 +149,46 @@ PARSERS = {
 }
 
 
-def fetch_provider(name: str, dry_run: bool = False) -> tuple[bool, int]:
+def write_chunks(cidrs: list[str], provider_name: str, dry_run: bool = False) -> int:
+    """Write CIDRs to chunk files.
+
+    Returns:
+        Number of chunk files created
+    """
+    if len(cidrs) <= CHUNK_SIZE:
+        # Provider fits in a single chunk
+        chunk_file = CHUNKS_DIR / provider_name / f"{provider_name}-part-001.txt"
+        if dry_run:
+            print(f"  Would write {len(cidrs)} CIDRs to {chunk_file}")
+        else:
+            chunk_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(chunk_file, 'w') as f:
+                for cidr in cidrs:
+                    f.write(f"{cidr}\n")
+            print(f"  Wrote {len(cidrs)} CIDRs to {chunk_file}")
+        return 1
+
+    # Split into multiple chunks
+    chunk_files = 0
+    for i in range(0, len(cidrs), CHUNK_SIZE):
+        chunk_cidrs = cidrs[i:i + CHUNK_SIZE]
+        chunk_num = (i // CHUNK_SIZE) + 1
+        chunk_file = CHUNKS_DIR / provider_name / f"{provider_name}-part-{chunk_num:03d}.txt"
+
+        if dry_run:
+            print(f"  Would write {len(chunk_cidrs)} CIDRs to {chunk_file}")
+        else:
+            chunk_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(chunk_file, 'w') as f:
+                for cidr in chunk_cidrs:
+                    f.write(f"{cidr}\n")
+            print(f"  Wrote {len(chunk_cidrs)} CIDRs to {chunk_file}")
+        chunk_files += 1
+
+    return chunk_files
+
+
+def fetch_provider(name: str, dry_run: bool = False, chunk: bool = True) -> tuple[bool, int]:
     """Fetch and save IP ranges for a provider.
 
     Returns:
@@ -176,12 +219,17 @@ def fetch_provider(name: str, dry_run: bool = False) -> tuple[bool, int]:
 
         if dry_run:
             print(f"  Would write {len(cidrs)} CIDRs to {output_path}")
+            if chunk:
+                write_chunks(cidrs, name, dry_run=True)
         else:
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, 'w') as f:
                 for cidr in cidrs:
                     f.write(f"{cidr}\n")
             print(f"  Wrote {len(cidrs)} CIDRs to {output_path}")
+
+            if chunk:
+                write_chunks(cidrs, name, dry_run=False)
 
         return True, len(cidrs)
 
@@ -217,6 +265,11 @@ def main():
         action='store_true',
         help='List available providers and exit'
     )
+    parser.add_argument(
+        '--no-chunk',
+        action='store_true',
+        help='Skip updating chunk files'
+    )
 
     args = parser.parse_args()
 
@@ -241,9 +294,10 @@ def main():
     # Fetch each provider
     success_count = 0
     total_cidrs = 0
+    chunk = not args.no_chunk
 
     for name in providers_to_fetch:
-        success, count = fetch_provider(name, args.dry_run)
+        success, count = fetch_provider(name, args.dry_run, chunk)
         if success:
             success_count += 1
             total_cidrs += count
