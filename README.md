@@ -59,6 +59,20 @@ All list files are plain text with one CIDR per line, for example:
 198.51.100.10/32
 ```
 
+## Data Sources
+
+| Provider | Source URL |
+|----------|------------|
+| AWS | https://ip-ranges.amazonaws.com/ip-ranges.json |
+| DigitalOcean | https://www.digitalocean.com/geo/google.csv |
+| Hetzner | https://bgp.he.net/AS24940#_prefixes |
+| Hostinger | Manual extraction (no public API) |
+| Linode | https://geoip.linode.com/ |
+| OVH | https://www.ovh.com/manager/dedicated/allowerlist.json |
+| ProtonVPN | https://protonvpn.com/vpn-servers |
+| Tor Exit Nodes | https://check.torproject.org/exit-addresses |
+| Vultr | https://www.vultr.com/resources/faq/#downloadableIPRanges |
+
 ## Intended Microsoft 365 / Entra Usage
 
 - Use files in `lists/providers/` when one named location per provider is acceptable.

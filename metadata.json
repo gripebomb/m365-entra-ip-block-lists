@@ -1,0 +1,54 @@
+{
+  "providers": {
+    "aws": {
+      "source": "https://ip-ranges.amazonaws.com/ip-ranges.json",
+      "last_updated": "2026-02-12",
+      "cidr_count": 7367
+    },
+    "digitalocean": {
+      "source": "https://www.digitalocean.com/geo/google.csv",
+      "last_updated": "2026-02-12",
+      "cidr_count": 1051
+    },
+    "hetzner": {
+      "source": "https://bgp.he.net/AS24940#_prefixes",
+      "last_updated": "2026-02-12",
+      "cidr_count": 81,
+      "note": "Manual extraction from BGP looking glass"
+    },
+    "hostinger": {
+      "source": null,
+      "last_updated": "2026-02-12",
+      "cidr_count": 859,
+      "note": "Manual extraction - no public API available"
+    },
+    "linode": {
+      "source": "https://geoip.linode.com/",
+      "last_updated": "2026-02-12",
+      "cidr_count": 5132
+    },
+    "ovh": {
+      "source": "https://www.ovh.com/manager/dedicated/allowerlist.json",
+      "last_updated": "2026-02-12",
+      "cidr_count": 599
+    },
+    "protonvpn": {
+      "source": "https://protonvpn.com/vpn-servers",
+      "last_updated": "2026-02-12",
+      "cidr_count": 830,
+      "note": "Manual extraction from server list"
+    },
+    "tor-exit-nodes": {
+      "source": "https://check.torproject.org/exit-addresses",
+      "last_updated": "2026-02-12",
+      "cidr_count": 1372
+    },
+    "vultr": {
+      "source": "https://www.vultr.com/resources/faq/#downloadableIPRanges",
+      "last_updated": "2026-02-12",
+      "cidr_count": 434
+    }
+  },
+  "chunk_size": 2000,
+  "note": "IPv4 CIDR lists only - IPv6 not currently supported"
+}
